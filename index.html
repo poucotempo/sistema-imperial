@@ -78,28 +78,31 @@
             };
 
             const fakeSlots = ["Fortune Mouse", "Fortune Dragon", "Fortune Tiger", "Fortune Ox"];
-            const selectedSlot = fakeSlots[Math.floor(Math.random() * fakeSlots.length)];
 
             let savedGame = localStorage.getItem("selectedGame");
             let savedLink = localStorage.getItem("selectedLink");
             let savedChance = localStorage.getItem("selectedChance");
+            let savedSlot = localStorage.getItem("selectedSlot");
             let expirationTime = localStorage.getItem("expirationTime");
             let currentTime = new Date().getTime();
 
-            if (!savedGame || !savedLink || !savedChance || !expirationTime || currentTime > expirationTime) {
+            if (!savedGame || !savedLink || !savedChance || !savedSlot || !expirationTime || currentTime > expirationTime) {
                 const gameNames = Object.keys(games);
                 savedGame = gameNames[Math.floor(Math.random() * gameNames.length)];
                 savedChance = Math.floor(Math.random() * (96 - 84 + 1)) + 84;
                 savedLink = games[savedGame][Math.floor(Math.random() * games[savedGame].length)];
+                savedSlot = fakeSlots[Math.floor(Math.random() * fakeSlots.length)];
                 expirationTime = currentTime + (10 * 60 * 1000);
+
                 localStorage.setItem("expirationTime", expirationTime);
                 localStorage.setItem("selectedGame", savedGame);
                 localStorage.setItem("selectedLink", savedLink);
                 localStorage.setItem("selectedChance", savedChance);
+                localStorage.setItem("selectedSlot", savedSlot);
             }
 
             document.getElementById("gameName").innerText = savedGame;
-            document.getElementById("activeGame").innerText = selectedSlot;
+            document.getElementById("activeGame").innerText = savedSlot;
             document.getElementById("gameChance").innerText = savedChance + "%";
 
             document.getElementById("affiliateLink").addEventListener('click', function() {
