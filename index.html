@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 Sinal Ativo - Últimas Vagas</title>
+    <title>Sistema Imperial</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
         body {
@@ -33,7 +33,7 @@
             color: #ff4747;
             margin-bottom: 20px;
         }
-        .game, .percentage, .countdown {
+        .game, .platform, .percentage, .countdown {
             margin: 10px 0;
             font-size: 18px;
         }
@@ -61,7 +61,8 @@
 <body>
     <div class="container">
         <div class="title">🔐 Sinal Privado Detectado</div>
-        <div class="game">Plataforma: <span id="gameName">---</span></div>
+        <div class="game">🎰 Jogo Ativo: <span id="activeGame">---</span></div>
+        <div class="platform">Plataforma: <span id="gameName">---</span></div>
         <div class="percentage">Nível: <span id="gameChance">--%</span></div>
         <div class="countdown">Atualiza às: <span id="timer"></span></div>
         <button id="affiliateLink" class="button">Acessar Plataforma</button>
@@ -73,6 +74,9 @@
                 "896Bet": ["https://pudimwin7.com/index?id=45690088_", "https://140.150.32.35:5030/?id=189081897&currency=BRL&type=2"],
                 "PudinWIN7": ["https://pudimwin7.com/index?id=45690088_", "https://140.150.32.35:5030/?id=189081897&currency=BRL&type=2"]
             };
+
+            const fakeSlots = ["Fortune Mouse", "Fortune Dragon", "Fortune Tiger", "Fortune Ox"];
+            const selectedSlot = fakeSlots[Math.floor(Math.random() * fakeSlots.length)];
 
             let savedGame = localStorage.getItem("selectedGame");
             let savedLink = localStorage.getItem("selectedLink");
@@ -93,9 +97,10 @@
             }
 
             document.getElementById("gameName").innerText = savedGame;
+            document.getElementById("activeGame").innerText = selectedSlot;
             document.getElementById("gameChance").innerText = savedChance + "%";
 
-            // ABRIR EM NOVA ABA
+            // Abrir em nova aba
             document.getElementById("affiliateLink").addEventListener('click', function() {
                 window.open(savedLink, '_blank');
             });
