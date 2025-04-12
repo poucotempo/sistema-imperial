@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Sinal Ativo - Últimas Vagas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: #0a0a0a url('https://i.postimg.cc/yxzycFkB/Chat-GPT-Image-10-de-abr-de-2025-16-59-52.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(10, 10, 10, 0.88);
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 20px #ff0000;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4747;
+            margin-bottom: 20px;
+        }
+        .game, .percentage, .countdown {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #ffc107;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 0 15px #ff0000;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #dc3545;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">🔐 Sinal Privado Detectado</div>
+        <div class="game">Plataforma: <span id="gameName">---</span></div>
+        <div class="percentage">Nível: <span id="gameChance">--%</span></div>
+        <div class="countdown">Atualiza às: <span id="timer"></span></div>
+        <a id="affiliateLink" href="#" class="button">Acessar Plataforma</a>
+    </div>
+
+    <script>
+        function cloakLink(url) {
+            // Simples camuflagem
+            return "https://redirect.cool/redir?to=" + btoa(url);
+        }
+
+        function updateGameSignal() {
+            const games = {
+                "896Bet": ["https://pudimwin7.com/index?id=45690088_", "https://cutt.ly/krfahAjL"],
+                "PudinWIN7": ["https://pudimwin7.com/index?id=45690088_", "https://cutt.ly/krfahAjL"],
+            };
+
+            let savedGame = localStorage.getItem("selectedGame");
+            let savedLink = localStorage.getItem("selectedLink");
+            let savedChance = localStorage.getItem("selectedChance");
+            let expirationTime = localStorage.getItem("expirationTime");
+            let currentTime = new Date().getTime();
+
+            if (!savedGame || !savedLink || !savedChance || !expirationTime || currentTime > expirationTime) {
+                const gameNames = Object.keys(games);
+                savedGame = gameNames[Math.floor(Math.random() * gameNames.length)];
+                savedChance = Math.floor(Math.random() * (96 - 84 + 1)) + 84;
+                savedLink = games[savedGame][Math.floor(Math.random() * games[savedGame].length)];
+                expirationTime = currentTime + (10 * 60 * 1000);
+                localStorage.setItem("expirationTime", expirationTime);
+                localStorage.setItem("selectedGame", savedGame);
+                localStorage.setItem("selectedLink", savedLink);
+                localStorage.setItem("selectedChance", savedChance);
+            }
+
+            document.getElementById("gameName").innerText = savedGame;
+            document.getElementById("gameChance").innerText = savedChance + "%";
+            document.getElementById("affiliateLink").href = cloakLink(savedLink);
+            let formattedTime = new Date(parseInt(expirationTime)).toLocaleTimeString('pt-BR', {
+                timeZone: 'America/Sao_Paulo',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById("timer").innerText = formattedTime;
+        }
+
+        updateGameSignal();
+    </script>
+</body>
+</html>
